@@ -2,16 +2,23 @@ require('dotenv').config();
 const express = require('express');
 const PORT = process.env.PORT || 5050;
 const app = express();
-let cors = require("cors");
+
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+    res.setHeader('Access-Control-Allow-Credentials', true);
+    next();
+});
 
 const Query = require("minecraft-query");
-const mineQuery = new Query({host: process.env.SERVER, port: process.env.QUERYPORT, timeout: 7500});
+const mineQuery = new Query({ host: process.env.SERVER, port: process.env.QUERYPORT, timeout: 7500 });
 
-app.get("/minecraft", cors(), (req, res) => {
+app.get("/minecraft", (req, res) => {
     mineQuery.fullStat()
-    .then(success => {
-        res.json(success)
-    })
+        .then(success => {
+            res.json(success)
+        })
 })
 
 app.listen(PORT, () => {
