@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const PORT = process.env.PORT || 5050;
 const app = express();
+let cors = require("cors");
 
 const Query = require("minecraft-query");
 const mineQuery = new Query({host: process.env.SERVER, port: process.env.QUERYPORT, timeout: 7500});
@@ -12,6 +13,8 @@ app.get("/minecraft", (req, res) => {
         res.json(success)
     })
 })
+
+app.use(cors());
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
