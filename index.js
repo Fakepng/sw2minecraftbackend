@@ -14,6 +14,10 @@ app.use(function (req, res, next) {
 const Query = require("minecraft-query");
 const mineQuery = new Query({ host: process.env.SERVER, port: process.env.QUERYPORT, timeout: 7500 });
 
+app.get("/", (req, res) => {
+    res.json({ message: "welecome to fakepng api backend", contact: "contact@fakepng.com"})
+})
+
 app.get("/minecraft", (req, res) => {
     mineQuery.fullStat()
         .then(success => {
