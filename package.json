@@ -4,7 +4,7 @@
   "description": "backend of sw2 minecraft site",
   "main": "index.js",
   "engines": {
-    "node": "16.x"
+    "node": "14.x"
   },
   "scripts": {
     "start": "node index.js",
