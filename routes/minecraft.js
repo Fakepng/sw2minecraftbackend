@@ -8,6 +8,9 @@ router.get("/", (req, res) => {
         .then(success => {
             res.json(success)
         })
+        .catch(err => {
+            res.json({ "error": true})
+        })
 })
 
 module.exports = router;
