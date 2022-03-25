@@ -16,13 +16,13 @@ router.get("/register", (req, res) => {
     })
 })
 
-router.post("/register", (req, res) => {
+router.post("/register", async (req, res) => {
     try {
         const { studentId, nameTH, nameEN, email, MOS, classroom, tel, username, activity } = req.body;
         if (!(studentId && nameTH && nameEN && email && classroom && tel && username && activity )) {
             return res.status(400).json({ message: "Data missing" });
         }
-        DB.create({ studentId, nameTH, nameEN, email, MOS, classroom, tel, username, activity })
+        await DB.create({ studentId, nameTH, nameEN, email, MOS, classroom, tel, username, activity })
         res.status(201).json({ message: `Register successfully` });
     } catch (err) {
         console.log(err)
