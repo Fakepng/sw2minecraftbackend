@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use('/minecraft', require('./routes/minecraft'));
 app.use('/user', require('./routes/user'));
+app.use('/admin', require('./routes/admin'));
 
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`);
