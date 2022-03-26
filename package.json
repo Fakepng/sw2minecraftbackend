@@ -1,6 +1,6 @@
 {
   "name": "sw2minecraftbackend",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "backend of sw2 minecraft site",
   "main": "index.js",
   "engines": {
@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Fakepng/sw2minecraftbackend#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.2",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
