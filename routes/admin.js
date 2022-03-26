@@ -40,11 +40,10 @@ router.post("/login", async (req, res) => {
         }
         const admin = await DB.findOne({ user })
         const username = admin.user;
-        console.log(req.body)
-        console.log(password)
-        console.log(admin.password)
 
-        const key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
+        const key = process.env.AES_KEY.split(', ').map(function(item) {
+            return parseInt(item, 10);
+        });
         const encryptedBytes = aesjs.utils.hex.toBytes(password);
         const aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
         const decryptedBytes = aesCtr.decrypt(encryptedBytes);
