@@ -30,10 +30,23 @@ router.post("/register", async (req, res) => {
     }
 })
 
+router.get("/query/", async (req, res) => {
+    const user = await DB.find({})
+    res.json(user);
+})
+
 router.get("/query/:studentId", async (req, res) => {
     const user = await DB.find({ studentId: req.params.studentId })
     if (user.length === 0) return res.status(404).json({ message: "User not found" });
     res.json(user);
+})
+
+router.delete("/query/:id", async (req, res) => {
+    if (!req.params.id) return res.status(400).json({ message: "Data missing" });
+    const user = await DB.findOne({ _id: req.params.id })
+    if (user.length === 0) return res.status(404).json({ message: "User not found" });
+    await DB.deleteOne({ _id: req.params.id })
+    res.json({ message: "Delete successfully" });
 })
 
 module.exports = router;
