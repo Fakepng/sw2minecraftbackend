@@ -14,7 +14,16 @@ router.post("/register", async (req, res) => {
 
         const oldAdmin = DB.findOne({ user });
         if (oldAdmin.user === user) return res.status(409).send("User already exists");
-        const hashPassword = await bcrypt.hash(password, 10); 
+
+        const key = process.env.AES_KEY.split(', ').map(function(item) {
+            return parseInt(item, 10);
+        });
+        const encryptedBytes = aesjs.utils.hex.toBytes(password);
+        const aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
+        const decryptedBytes = aesCtr.decrypt(encryptedBytes);
+        const decryptedPassword = aesjs.utils.utf8.fromBytes(decryptedBytes);
+
+        const hashPassword = await bcrypt.hash(decryptedPassword, 10); 
         const admin = await DB.create({ user, password: hashPassword });
         const username = admin.user;
         const token = jwt.sign(
