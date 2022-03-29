@@ -10,5 +10,6 @@ module.exports = model("testsw2data", new Schema({
     tel: String,
     username: String,
     activity: String,
-    date: { type: Date, default: Date.now },
+    check: { type: Boolean, default: false },
+    date: { type: Date, default: Date.now }
 }));
