@@ -1,6 +1,6 @@
 {
   "name": "sw2minecraftbackend",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "backend of sw2 minecraft site",
   "main": "index.js",
   "engines": {
