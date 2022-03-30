@@ -30,6 +30,17 @@ router.post("/register", async (req, res) => {
     }
 })
 
+router.put("/check", async (req, res) => {
+    try {
+        const { _id, checked } = req.body;
+        await DB.updateOne({ _id }, { $set: { checked } })
+        res.status(200).json({ message: `Update successfully` });
+    } catch (err) {
+        console.log(err)
+        res.sendStatus(500);
+    }
+})
+
 router.get("/query/", async (req, res) => {
     const user = await DB.find({})
     res.json(user);
